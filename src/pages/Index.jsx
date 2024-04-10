@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { Box, VStack, HStack, Text, Button, Input, Select, useToast, Image } from "@chakra-ui/react";
-import { FaWallet, FaPlus, FaCreditCard, FaCog } from "react-icons/fa";
+import { FaWallet, FaPlus, FaCreditCard, FaCog, FaExchangeAlt } from "react-icons/fa";
 
 const Index = () => {
-  const [balance, setBalance] = useState(0);
+  const [ngnBalance, setNgnBalance] = useState(0);
+  const [usdBalance, setUsdBalance] = useState(0);
   const [cards, setCards] = useState([]);
   const [screen, setScreen] = useState("home");
   const [cardNumber, setCardNumber] = useState("");
@@ -30,8 +31,7 @@ const Index = () => {
   };
 
   const loadFunds = () => {
-    // TODO: Initiate fund loading transaction using Bank/Payment Gateway API
-    setBalance(balance + fundAmount);
+    setNgnBalance(ngnBalance + fundAmount);
     setScreen("home");
     toast({
       title: "Funds Loaded",
@@ -42,8 +42,22 @@ const Index = () => {
     });
   };
 
+  const convertToUSD = () => {
+    const exchangeRate = 0.0024;
+    const usdAmount = ngnBalance * exchangeRate;
+    setNgnBalance(0);
+    setUsdBalance(usdBalance + usdAmount);
+    toast({
+      title: "Funds Converted",
+      description: `NGN ${ngnBalance} has been converted to USD ${usdAmount.toFixed(2)}.`,
+      status: "success",
+      duration: 3000,
+      isClosable: true,
+    });
+  };
+
   const makeTransaction = () => {
-    if (transactionAmount > balance) {
+    if (transactionAmount > usdBalance) {
       toast({
         title: "Insufficient Funds",
         description: "You do not have enough balance to complete this transaction.",
@@ -54,7 +68,7 @@ const Index = () => {
       return;
     }
     // TODO: Initiate transaction using selected card
-    setBalance(balance - transactionAmount);
+    setUsdBalance(usdBalance - transactionAmount);
     setScreen("home");
     toast({
       title: "Transaction Successful",
@@ -76,9 +90,14 @@ const Index = () => {
             </Text>
             <Box bg="white" p={6} borderRadius="lg" boxShadow="md" w="90%">
               <HStack justify="space-between" mb={4}>
-                <Text fontSize="xl" fontWeight="bold">
-                  Balance: ${balance}
-                </Text>
+                <VStack align="stretch">
+                  <Text fontSize="xl" fontWeight="bold">
+                    NGN Balance: ₦{ngnBalance}
+                  </Text>
+                  <Text fontSize="xl" fontWeight="bold">
+                    USD Balance: ${usdBalance.toFixed(2)}
+                  </Text>
+                </VStack>
                 <Button leftIcon={<FaPlus />} colorScheme="teal" onClick={() => setScreen("addCard")}>
                   Add Card
                 </Button>
@@ -105,6 +124,9 @@ const Index = () => {
               <VStack>
                 <Button leftIcon={<FaWallet />} colorScheme="teal" onClick={() => setScreen("loadFunds")}>
                   Load Funds
+                </Button>
+                <Button leftIcon={<FaExchangeAlt />} colorScheme="teal" onClick={convertToUSD} mt={4}>
+                  Convert NGN to USD
                 </Button>
                 <Button leftIcon={<FaCog />} variant="outline" colorScheme="teal" onClick={() => setScreen("settings")}>
                   Settings
