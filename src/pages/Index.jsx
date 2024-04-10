@@ -125,9 +125,14 @@ const Index = () => {
                 <Button leftIcon={<FaWallet />} colorScheme="teal" onClick={() => setScreen("loadFunds")}>
                   Load Funds
                 </Button>
-                <Button leftIcon={<FaExchangeAlt />} colorScheme="teal" onClick={convertToUSD} mt={4}>
-                  Convert NGN to USD
-                </Button>
+                <VStack spacing={4} align="stretch">
+                  <Button leftIcon={<FaExchangeAlt />} colorScheme="teal" onClick={convertToUSD}>
+                    Convert NGN to USD
+                  </Button>
+                  <Text fontSize="sm" color="gray.500">
+                    Daily Exchange Rate: 1 USD = 415 NGN
+                  </Text>
+                </VStack>
                 <Button leftIcon={<FaCog />} variant="outline" colorScheme="teal" onClick={() => setScreen("settings")}>
                   Settings
                 </Button>
