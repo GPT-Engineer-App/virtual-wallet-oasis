@@ -98,8 +98,8 @@ const Index = () => {
                     USD Balance: ${usdBalance.toFixed(2)}
                   </Text>
                 </VStack>
-                <Button leftIcon={<FaPlus />} colorScheme="teal" onClick={() => setScreen("addCard")}>
-                  Add Card
+                <Button leftIcon={<FaPlus />} colorScheme="teal" onClick={() => (window.location.href = "https://pay.google.com")}>
+                  Virtual Card
                 </Button>
               </HStack>
               {cards.map((card, index) => (
