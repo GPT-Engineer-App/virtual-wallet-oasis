@@ -84,7 +84,7 @@ const Index = () => {
       <VStack spacing={8} align="center">
         {screen === "home" && (
           <>
-            <Image src="https://images.unsplash.com/photo-1659177137555-2f1ba453f70c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1MDcxMzJ8MHwxfHNlYXJjaHwxfHx3YWxsZXQlMjBpY29ufGVufDB8fHx8MTcxMjc0MzU0N3ww&ixlib=rb-4.0.3&q=80&w=1080" w={20} h={20} />
+            <Image src="https://images.unsplash.com/photo-1682687982167-d7fb3ed8541c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NjAwMjJ8MHwxfHNlYXJjaHwxfHx3YWxsZXR8ZW58MHx8fHwxNjgzNTU1NjMzfDA&ixlib=rb-4.0.3&q=80&w=1080" w={20} h={20} />
             <Text fontSize="4xl" fontWeight="bold" color="white">
               Virtual Wallet
             </Text>
